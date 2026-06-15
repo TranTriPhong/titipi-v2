@@ -1,4 +1,7 @@
 ---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
 interface Props {
   title?: string;
   description?: string;
@@ -25,7 +28,7 @@ const pageTitle = title === "titipi." ? title : `${title} · titipi.`;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
 
@@ -40,8 +43,10 @@ const pageTitle = title === "titipi." ? title : `${title} · titipi.`;
       })();
     </script>
   </head>
-  <body class="min-h-screen flex flex-col">
+  <body class="min-h-screen flex flex-col bg-white text-foreground dark:bg-[#0f1117] dark:text-foreground-dark">
+    <Header />
     <slot />
+    <Footer />
 
     <script
       src="https://platform.linkedin.com/badges/js/profile.js"

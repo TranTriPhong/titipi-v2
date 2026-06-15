@@ -11,13 +11,43 @@ const sectionBase =
   "border-t border-gray-200 dark:border-gray-800";
 
 const sectionOdd = `${sectionBase} bg-white dark:bg-[#0F1117]`;
-const sectionEven = `${sectionBase} bg-gray-50 dark:bg-[#1A1F2E]`;
+const sectionEven = `${sectionBase} bg-white dark:bg-[#0F1117]`;
 
 const cardBase =
-  "group flex flex-col rounded-md border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 p-6 shadow-sm transition-all duration-200 hover:border-gray-400 dark:hover:border-gray-600 hover:shadow-md";
+  "group flex flex-col rounded-md border border-gray-200 dark:border-gray-800 bg-card dark:bg-card-dark p-6 shadow-sm transition-all duration-200 hover:border-gray-400 dark:hover:border-gray-600 hover:shadow-md";
 
-const profileCard =
-  `${cardBase} hover:bg-gray-100 dark:hover:bg-gray-800`;
+const getProfileStyle = (platform: "GitHub" | "LeetCode" | "TryHackMe" | "HackTheBox") => {
+  switch (platform) {
+    case "GitHub":
+      return {
+        card: "bg-[#f0f6fc] border-[#231f20] hover:bg-[#e1e9f1] hover:shadow-md",
+        text: "text-[#231f20]",
+        desc: "text-[#57606a]",
+        iconClass: "text-[#231f20]"
+      };
+    case "LeetCode":
+      return {
+        card: "bg-[#ffa116] border-[#ffa116]/80 hover:bg-[#e68f10] hover:shadow-md",
+        text: "text-[#1a1a1a]",
+        desc: "text-[#3c3c3c]",
+        iconClass: "text-[#1a1a1a]"
+      };
+    case "TryHackMe":
+      return {
+        card: "bg-[#727c92] border-[#727c92] hover:border-[#de3e3e] hover:bg-[#646e83] hover:shadow-md",
+        text: "text-white",
+        desc: "text-[#e2e8f0]",
+        iconClass: "text-white"
+      };
+    case "HackTheBox":
+      return {
+        card: "bg-[#9fef00] border-[#9fef00]/80 hover:bg-[#8ad000] hover:shadow-md",
+        text: "text-[#111827]",
+        desc: "text-[#1f2937]",
+        iconClass: "text-[#111827]"
+      };
+  }
+};
 
 const profileLinks = [
   {
@@ -101,8 +131,6 @@ const labStats = [
 ---
 
 <Layout>
-  <Header />
-
   <main class="flex-1">
     <!-- Hero -->
     <section id="about" class={sectionOdd}>
@@ -139,7 +167,7 @@ const labStats = [
               href="#writeups"
               class:list={[
                 btnBase,
-                "border border-accent bg-accent text-white hover:bg-[#5b6370] hover:shadow-sm",
+                "border border-accent bg-accent text-white hover:bg-[#009299] hover:shadow-sm",
               ]}
             >
               Read write-ups
@@ -148,14 +176,16 @@ const labStats = [
         </div>
 
         <div class="shrink-0">
-          <div
-            class="badge-base LI-profile-badge"
-            data-locale="en_US"
-            data-size="medium"
-            data-theme="light"
-            data-type="VERTICAL"
-            data-vanity="triphongtran"
-          >
+          <div class="border border-gray-200 rounded-lg p-3 bg-white shadow-sm">
+            <div
+              class="badge-base LI-profile-badge"
+              data-locale="en_US"
+              data-size="medium"
+              data-theme="light"
+              data-type="VERTICAL"
+              data-vanity="triphongtran"
+            >
+            </div>
           </div>
         </div>
       </div>
@@ -169,22 +199,25 @@ const labStats = [
         >
           Profiles
         </h2>
-        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {
-            profileLinks.map((link) => (
-              <a
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class={profileCard}
-              >
-                <ProfileIcon platform={link.name} />
-                <p class="mt-4 font-mono text-sm font-medium text-foreground dark:text-foreground-dark group-hover:text-accent">
-                  {link.name}
-                </p>
-                <p class="mt-2 text-sm text-muted">{link.description}</p>
-              </a>
-            ))
+            profileLinks.map((link) => {
+              const styles = getProfileStyle(link.name);
+              return (
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class={`group flex flex-col rounded-md border p-6 shadow-sm transition-all duration-200 ${styles.card}`}
+                >
+                  <ProfileIcon platform={link.name} class={styles.iconClass} />
+                  <p class={`mt-4 font-mono text-sm font-semibold ${styles.text}`}>
+                    {link.name}
+                  </p>
+                  <p class={`mt-2 text-sm ${styles.desc}`}>{link.description}</p>
+                </a>
+              );
+            })
           }
         </div>
       </div>
@@ -222,7 +255,7 @@ const labStats = [
               </p>
               <div class="mt-6 flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
-                  <span class="rounded-md border border-border dark:border-border-dark px-2.5 py-1 font-mono text-xs text-muted">
+                  <span class="rounded-md bg-[rgba(0,173,181,0.08)] px-2.5 py-1 font-mono text-xs font-medium text-accent">
                     {tag}
                   </span>
                 ))}
@@ -261,7 +294,7 @@ const labStats = [
             writeups.map((post) => (
               <a href={post.href} class={cardBase}>
                 <div class="mb-4 flex items-center justify-between gap-3">
-                  <span class="rounded-md border border-border dark:border-border-dark px-2.5 py-1 font-mono text-xs text-accent">
+                  <span class="rounded-md bg-[rgba(0,173,181,0.08)] px-2.5 py-1 font-mono text-xs font-medium text-accent">
                     {post.tag}
                   </span>
                   <time class="font-mono text-xs text-muted">{post.date}</time>
@@ -283,7 +316,7 @@ const labStats = [
     <section id="lab" class={sectionOdd}>
       <div class="mx-auto max-w-5xl px-6 py-16 md:px-8">
         <div
-          class="rounded-md border border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-[#1A1F2E] p-8 md:p-10 shadow-sm"
+          class="rounded-md border border-gray-200 dark:border-gray-800 bg-card dark:bg-card-dark p-8 md:p-10 shadow-sm"
         >
           <div
             class="flex flex-col gap-10 md:flex-row md:items-center md:justify-between"
@@ -301,7 +334,7 @@ const labStats = [
               </p>
               <a
                 href="#"
-                class="inline-block rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-5 py-2.5 text-sm transition-all duration-200 hover:border-gray-400 dark:hover:border-gray-600 hover:shadow-sm"
+                class="inline-block rounded-md border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 px-5 py-2.5 text-sm transition-all duration-200 hover:border-gray-400 dark:hover:border-gray-600 hover:shadow-sm text-foreground dark:text-foreground-dark font-medium"
               >
                 Open lab dashboard →
               </a>
@@ -310,7 +343,7 @@ const labStats = [
             <div class="grid w-full max-w-sm grid-cols-3 gap-4 md:max-w-md">
               {
                 labStats.map((stat) => (
-                  <div class="rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-4 text-center shadow-sm">
+                  <div class="rounded-md border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-4 text-center shadow-sm">
                     <p class="font-mono text-3xl font-medium text-accent md:text-4xl">
                       {stat.value}
                     </p>
@@ -324,6 +357,4 @@ const labStats = [
       </div>
     </section>
   </main>
-
-  <Footer />
 </Layout>
