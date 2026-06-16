@@ -7,8 +7,7 @@ import ProfileIcon from "../components/ProfileIcon.astro";
 const btnBase =
   "inline-flex items-center justify-center rounded-md px-5 py-2.5 text-sm font-medium transition-all duration-200";
 
-const sectionBase =
-  "border-t border-gray-200 dark:border-gray-800";
+const sectionBase = "border-t border-gray-200 dark:border-gray-800";
 
 const sectionOdd = `${sectionBase} bg-white dark:bg-[#0F1117]`;
 const sectionEven = `${sectionBase} bg-white dark:bg-[#0F1117]`;
@@ -16,35 +15,37 @@ const sectionEven = `${sectionBase} bg-white dark:bg-[#0F1117]`;
 const cardBase =
   "group flex flex-col rounded-md border border-gray-200 dark:border-gray-800 bg-card dark:bg-card-dark p-6 shadow-sm transition-all duration-200 hover:border-gray-400 dark:hover:border-gray-600 hover:shadow-md";
 
-const getProfileStyle = (platform: "GitHub" | "LeetCode" | "TryHackMe" | "HackTheBox") => {
+const getProfileStyle = (
+  platform: "GitHub" | "LeetCode" | "TryHackMe" | "HackTheBox",
+) => {
   switch (platform) {
     case "GitHub":
       return {
         card: "bg-[#f0f6fc] border-[#231f20] hover:bg-[#e1e9f1] hover:shadow-md",
         text: "text-[#231f20]",
         desc: "text-[#57606a]",
-        iconClass: "text-[#231f20]"
+        iconClass: "text-[#231f20]",
       };
     case "LeetCode":
       return {
         card: "bg-[#ffa116] border-[#ffa116]/80 hover:bg-[#e68f10] hover:shadow-md",
         text: "text-[#1a1a1a]",
         desc: "text-[#3c3c3c]",
-        iconClass: "text-[#1a1a1a]"
+        iconClass: "text-[#1a1a1a]",
       };
     case "TryHackMe":
       return {
         card: "bg-[#727c92] border-[#727c92] hover:border-[#de3e3e] hover:bg-[#646e83] hover:shadow-md",
         text: "text-white",
         desc: "text-[#e2e8f0]",
-        iconClass: "text-white"
+        iconClass: "text-white",
       };
     case "HackTheBox":
       return {
         card: "bg-[#9fef00] border-[#9fef00]/80 hover:bg-[#8ad000] hover:shadow-md",
         text: "text-[#111827]",
         desc: "text-[#1f2937]",
-        iconClass: "text-[#111827]"
+        iconClass: "text-[#111827]",
       };
   }
 };
@@ -135,237 +136,254 @@ const labStats = [
     <!-- Hero -->
     <section id="about" class={sectionOdd}>
       <div class="mx-auto max-w-5xl px-6 py-16 md:px-8">
-      <div
-        class="flex flex-col-reverse items-center gap-10 md:flex-row md:items-start md:justify-between md:gap-12"
-      >
-        <div class="flex-1 space-y-6 text-center md:text-left">
-          <p class="font-mono text-sm text-accent">Security · Code · Research</p>
-          <h1
-            class="text-4xl font-semibold tracking-tight text-foreground dark:text-foreground-dark md:text-5xl"
-          >
-            “titipi.” - just a small space for tech stuff
-          </h1>
-          <p class="max-w-lg text-base leading-relaxed text-muted md:text-lg">
-            This platform was created with a simple purpose: to share useful
-            insights, practical tech projects, and hands-on write-ups for anyone
-            pursuing a career in IT (esp. CyberSec). Whether you are getting
-            started with Linux, learning basic programming, or diving into
-            security labs, I hope you find something helpful here to aid you
-            along your journey :>>
-          </p>
-          <div class="flex flex-wrap justify-center gap-3 md:justify-start">
-            <a
-              href="#projects"
-              class:list={[
-                btnBase,
-                "border border-border dark:border-border-dark text-foreground dark:text-foreground-dark hover:border-accent hover:text-accent hover:shadow-sm",
-              ]}
-            >
-              View projects
-            </a>
-            <a
-              href="#writeups"
-              class:list={[
-                btnBase,
-                "border border-accent bg-accent text-white hover:bg-[#009299] hover:shadow-sm",
-              ]}
-            >
-              Read write-ups
-            </a>
-          </div>
-        </div>
-
-        <div class="shrink-0">
-          <div class="rounded-md border border-gray-200 dark:border-gray-800 bg-card dark:bg-card-dark p-6 shadow-sm text-center w-64">
-            <img
-              src="/avatar.jpg"
-              alt="Phong Tran"
-              class="mx-auto h-24 w-24 rounded-full object-cover border-2 border-gray-200 dark:border-gray-700"
-            />
-            <h3 class="mt-4 text-base font-semibold text-foreground dark:text-foreground-dark">
-              Phong Tran
-            </h3>
-            <p class="mt-1 text-sm text-muted">Information Technology Student</p>
-            <p class="mt-1 text-xs text-muted">
-              @SMCS - HNUE | Aspiring Cyber Security Engineer
-            </p>
-            <a
-              href="https://linkedin.com/in/triphongtran"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="mt-4 inline-flex items-center gap-1.5 rounded-md border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 px-4 py-2 text-sm font-medium text-foreground dark:text-foreground-dark transition-all duration-200 hover:border-accent hover:text-accent hover:shadow-sm"
-            >
-              View LinkedIn →
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Profile Links -->
-    <section class={sectionEven}>
-      <div class="mx-auto max-w-5xl px-6 py-16 md:px-8">
-        <h2
-          class="mb-8 text-sm font-medium uppercase tracking-widest text-muted"
-        >
-          Profiles
-        </h2>
-        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {
-            profileLinks.map((link) => {
-              const styles = getProfileStyle(link.name);
-              return (
-                <a
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class={`group flex flex-col rounded-md border p-6 shadow-sm transition-all duration-200 ${styles.card}`}
-                >
-                  <ProfileIcon platform={link.name} class={styles.iconClass} />
-                  <p class={`mt-4 font-mono text-sm font-semibold ${styles.text}`}>
-                    {link.name}
-                  </p>
-                  <p class={`mt-2 text-sm ${styles.desc}`}>{link.description}</p>
-                </a>
-              );
-            })
-          }
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects -->
-    <section id="projects" class={sectionOdd}>
-      <div class="mx-auto max-w-5xl px-6 py-16 md:px-8">
-      <div class="mb-8 flex items-end justify-between gap-6">
-        <div>
-          <h2
-            class="text-2xl font-semibold tracking-tight text-foreground dark:text-foreground-dark"
-          >
-            Featured Projects
-          </h2>
-          <p class="mt-2 text-sm text-muted">Tools and experiments I maintain.</p>
-        </div>
-        <a
-          href="#"
-          class="hidden shrink-0 text-sm text-muted transition-colors hover:text-accent sm:block"
-        >
-          View all →
-        </a>
-      </div>
-
-      <div class="grid gap-6 md:grid-cols-3">
-        {
-          projects.map((project) => (
-            <a href={project.href} class={cardBase}>
-              <h3 class="font-mono text-base font-medium text-foreground dark:text-foreground-dark group-hover:text-accent">
-                {project.title}
-              </h3>
-              <p class="mt-3 flex-1 text-sm leading-relaxed text-muted">
-                {project.description}
-              </p>
-              <div class="mt-6 flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <span class="rounded-md bg-[rgba(0,173,181,0.08)] px-2.5 py-1 font-mono text-xs font-medium text-accent">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </a>
-          ))
-        }
-      </div>
-      </div>
-    </section>
-
-    <!-- Latest Write-ups -->
-    <section id="writeups" class={sectionEven}>
-      <div class="mx-auto max-w-5xl px-6 py-16 md:px-8">
-        <div class="mb-8 flex items-end justify-between gap-6">
-          <div>
-            <h2
-              class="text-2xl font-semibold tracking-tight text-foreground dark:text-foreground-dark"
-            >
-              Latest Write-ups
-            </h2>
-            <p class="mt-2 text-sm text-muted">
-              Recent notes from labs and CTF challenges.
-            </p>
-          </div>
-          <a
-            href="#"
-            class="hidden shrink-0 text-sm text-muted transition-colors hover:text-accent sm:block"
-          >
-            View all →
-          </a>
-        </div>
-
-        <div class="grid gap-6 md:grid-cols-3">
-          {
-            writeups.map((post) => (
-              <a href={post.href} class={cardBase}>
-                <div class="mb-4 flex items-center justify-between gap-3">
-                  <span class="rounded-md bg-[rgba(0,173,181,0.08)] px-2.5 py-1 font-mono text-xs font-medium text-accent">
-                    {post.tag}
-                  </span>
-                  <time class="font-mono text-xs text-muted">{post.date}</time>
-                </div>
-                <h3 class="text-base font-medium text-foreground dark:text-foreground-dark group-hover:text-accent">
-                  {post.title}
-                </h3>
-                <p class="mt-3 flex-1 text-sm leading-relaxed text-muted">
-                  {post.excerpt}
-                </p>
-              </a>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <!-- Security Lab -->
-    <section id="lab" class={sectionOdd}>
-      <div class="mx-auto max-w-5xl px-6 py-16 md:px-8">
         <div
-          class="rounded-md border border-gray-200 dark:border-gray-800 bg-card dark:bg-card-dark p-8 md:p-10 shadow-sm"
+          class="flex flex-col-reverse items-center gap-10 md:flex-row md:items-start md:justify-between md:gap-12"
         >
-          <div
-            class="flex flex-col gap-10 md:flex-row md:items-center md:justify-between"
+          <div class="flex-1 space-y-6 text-center md:text-left">
+            <p class="font-mono text-sm text-accent">
+              Security · Code · Research
+            </p>
+            <h1
+              class="text-4xl font-semibold tracking-tight text-foreground dark:text-foreground-dark md:text-5xl"
+            >
+              “titipi.” - just a small space for tech stuff
+            </h1>
+            <p class="max-w-lg text-base leading-relaxed text-muted md:text-lg">
+              This platform was created with a simple purpose: to share useful
+              insights, practical tech projects, and hands-on write-ups for
+              anyone pursuing a career in IT (esp. CyberSec). Whether you are
+              getting started with Linux, learning basic programming, or diving
+              into security labs, I hope you find something helpful here to aid
+              you along your journey :>>
+            </p>
+            <div class="flex flex-wrap justify-center gap-3 md:justify-start">
+              <a
+                href="#projects"
+                class:list={[
+                  btnBase,
+                  "border border-border dark:border-border-dark text-foreground dark:text-foreground-dark hover:border-accent hover:text-accent hover:shadow-sm",
+                ]}
+              >
+                View projects
+              </a>
+              <a
+                href="#writeups"
+                class:list={[
+                  btnBase,
+                  "border border-accent bg-accent text-white hover:bg-[#009299] hover:shadow-sm",
+                ]}
+              >
+                Read write-ups
+              </a>
+            </div>
+          </div>
+
+          <div class="shrink-0">
+            <div
+              class="rounded-md border border-gray-200 dark:border-gray-800 bg-card dark:bg-card-dark p-6 shadow-sm text-center w-64"
+            >
+              <img
+                src="/avatar.jpg"
+                alt="Phong Tran"
+                class="mx-auto h-24 w-24 rounded-full object-cover border-2 border-gray-200 dark:border-gray-700"
+              />
+              <h3
+                class="mt-4 text-base font-semibold text-foreground dark:text-foreground-dark"
+              >
+                Phong Tran
+              </h3>
+              <p class="mt-1 text-xs text-muted">
+                Student @SMCS - HNUE | Aspiring Cyber Security Engineer
+              </p>
+              <a
+                href="https://linkedin.com/in/triphongtran"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-4 inline-flex items-center gap-1.5 rounded-md border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 px-4 py-2 text-sm font-medium text-foreground dark:text-foreground-dark transition-all duration-200 hover:border-accent hover:text-accent hover:shadow-sm"
+              >
+                View LinkedIn →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile Links -->
+      <section class={sectionEven}>
+        <div class="mx-auto max-w-5xl px-6 py-16 md:px-8">
+          <h2
+            class="mb-8 text-sm font-medium uppercase tracking-widest text-muted"
           >
-            <div class="max-w-md space-y-4">
-              <p class="font-mono text-sm text-accent">Security Lab</p>
+            Profiles
+          </h2>
+          <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {
+              profileLinks.map((link) => {
+                const styles = getProfileStyle(link.name);
+                return (
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class={`group flex flex-col rounded-md border p-6 shadow-sm transition-all duration-200 ${styles.card}`}
+                  >
+                    <ProfileIcon
+                      platform={link.name}
+                      class={styles.iconClass}
+                    />
+                    <p
+                      class={`mt-4 font-mono text-sm font-semibold ${styles.text}`}
+                    >
+                      {link.name}
+                    </p>
+                    <p class={`mt-2 text-sm ${styles.desc}`}>
+                      {link.description}
+                    </p>
+                  </a>
+                );
+              })
+            }
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section id="projects" class={sectionOdd}>
+        <div class="mx-auto max-w-5xl px-6 py-16 md:px-8">
+          <div class="mb-8 flex items-end justify-between gap-6">
+            <div>
               <h2
                 class="text-2xl font-semibold tracking-tight text-foreground dark:text-foreground-dark"
               >
-                Offensive practice, tracked.
+                Featured Projects
               </h2>
-              <p class="text-sm leading-relaxed text-muted">
-                A running log of machines, rooms, and flags across TryHackMe and
-                HackTheBox — updated as I work through new challenges.
+              <p class="mt-2 text-sm text-muted">
+                Tools and experiments I maintain.
               </p>
-              <a
-                href="#"
-                class="inline-block rounded-md border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 px-5 py-2.5 text-sm transition-all duration-200 hover:border-gray-400 dark:hover:border-gray-600 hover:shadow-sm text-foreground dark:text-foreground-dark font-medium"
-              >
-                Open lab dashboard →
-              </a>
             </div>
+            <a
+              href="#"
+              class="hidden shrink-0 text-sm text-muted transition-colors hover:text-accent sm:block"
+            >
+              View all →
+            </a>
+          </div>
 
-            <div class="grid w-full max-w-sm grid-cols-3 gap-4 md:max-w-md">
-              {
-                labStats.map((stat) => (
-                  <div class="rounded-md border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-4 text-center shadow-sm">
-                    <p class="font-mono text-3xl font-medium text-accent md:text-4xl">
-                      {stat.value}
-                    </p>
-                    <p class="mt-2 text-xs text-muted">{stat.label}</p>
+          <div class="grid gap-6 md:grid-cols-3">
+            {
+              projects.map((project) => (
+                <a href={project.href} class={cardBase}>
+                  <h3 class="font-mono text-base font-medium text-foreground dark:text-foreground-dark group-hover:text-accent">
+                    {project.title}
+                  </h3>
+                  <p class="mt-3 flex-1 text-sm leading-relaxed text-muted">
+                    {project.description}
+                  </p>
+                  <div class="mt-6 flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span class="rounded-md bg-[rgba(0,173,181,0.08)] px-2.5 py-1 font-mono text-xs font-medium text-accent">
+                        {tag}
+                      </span>
+                    ))}
                   </div>
-                ))
-              }
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
+      <!-- Latest Write-ups -->
+      <section id="writeups" class={sectionEven}>
+        <div class="mx-auto max-w-5xl px-6 py-16 md:px-8">
+          <div class="mb-8 flex items-end justify-between gap-6">
+            <div>
+              <h2
+                class="text-2xl font-semibold tracking-tight text-foreground dark:text-foreground-dark"
+              >
+                Latest Write-ups
+              </h2>
+              <p class="mt-2 text-sm text-muted">
+                Recent notes from labs and CTF challenges.
+              </p>
+            </div>
+            <a
+              href="#"
+              class="hidden shrink-0 text-sm text-muted transition-colors hover:text-accent sm:block"
+            >
+              View all →
+            </a>
+          </div>
+
+          <div class="grid gap-6 md:grid-cols-3">
+            {
+              writeups.map((post) => (
+                <a href={post.href} class={cardBase}>
+                  <div class="mb-4 flex items-center justify-between gap-3">
+                    <span class="rounded-md bg-[rgba(0,173,181,0.08)] px-2.5 py-1 font-mono text-xs font-medium text-accent">
+                      {post.tag}
+                    </span>
+                    <time class="font-mono text-xs text-muted">
+                      {post.date}
+                    </time>
+                  </div>
+                  <h3 class="text-base font-medium text-foreground dark:text-foreground-dark group-hover:text-accent">
+                    {post.title}
+                  </h3>
+                  <p class="mt-3 flex-1 text-sm leading-relaxed text-muted">
+                    {post.excerpt}
+                  </p>
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
+      <!-- Security Lab -->
+      <section id="lab" class={sectionOdd}>
+        <div class="mx-auto max-w-5xl px-6 py-16 md:px-8">
+          <div
+            class="rounded-md border border-gray-200 dark:border-gray-800 bg-card dark:bg-card-dark p-8 md:p-10 shadow-sm"
+          >
+            <div
+              class="flex flex-col gap-10 md:flex-row md:items-center md:justify-between"
+            >
+              <div class="max-w-md space-y-4">
+                <p class="font-mono text-sm text-accent">Security Lab</p>
+                <h2
+                  class="text-2xl font-semibold tracking-tight text-foreground dark:text-foreground-dark"
+                >
+                  Offensive practice, tracked.
+                </h2>
+                <p class="text-sm leading-relaxed text-muted">
+                  A running log of machines, rooms, and flags across TryHackMe
+                  and HackTheBox — updated as I work through new challenges.
+                </p>
+                <a
+                  href="#"
+                  class="inline-block rounded-md border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 px-5 py-2.5 text-sm transition-all duration-200 hover:border-gray-400 dark:hover:border-gray-600 hover:shadow-sm text-foreground dark:text-foreground-dark font-medium"
+                >
+                  Open lab dashboard →
+                </a>
+              </div>
+
+              <div class="grid w-full max-w-sm grid-cols-3 gap-4 md:max-w-md">
+                {
+                  labStats.map((stat) => (
+                    <div class="rounded-md border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-4 text-center shadow-sm">
+                      <p class="font-mono text-3xl font-medium text-accent md:text-4xl">
+                        {stat.value}
+                      </p>
+                      <p class="mt-2 text-xs text-muted">{stat.label}</p>
+                    </div>
+                  ))
+                }
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </section>
   </main>
 </Layout>
