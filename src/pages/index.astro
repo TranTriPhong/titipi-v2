@@ -3,15 +3,16 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import ProfileIcon from "../components/ProfileIcon.astro";
+import { supabase } from "../lib/supabase";
 
-const thmRes = await fetch(
-  'https://tryhackme.com/api/user/tr4ntriphong'
-).catch(() => null);
+const { data: stats } = await supabase
+  .from("lab_stats")
+  .select("*")
+  .single();
 
-const thmData = thmRes?.ok ? await thmRes.json() : null;
-
-const roomsCompleted = thmData?.completedRooms ?? 0;
-const thmPoints = thmData?.points ?? 0;
+const thmRooms = stats?.thm_rooms ?? 0;
+const thmPoints = stats?.thm_points ?? 0;
+const htbMachines = stats?.htb_machines ?? 0;
 
 const btnBase =
   "inline-flex items-center justify-center rounded-md px-5 py-2.5 text-sm font-medium transition-all duration-200";
@@ -134,8 +135,8 @@ const projects = [
 ];
 
 const labStats = [
-  { label: "Machines rooted (HTB)", value: "42" },
-  { label: "Rooms completed (THM)", value: String(roomsCompleted) },
+  { label: "Machines rooted (HTB)", value: String(htbMachines) },
+  { label: "Rooms completed (THM)", value: String(thmRooms) },
   { label: "Points earned (THM)", value: String(thmPoints) },
 ];
 ---
