@@ -5,10 +5,13 @@ import Footer from "../components/Footer.astro";
 import ProfileIcon from "../components/ProfileIcon.astro";
 import { supabase } from "../lib/supabase";
 
-const { data: stats } = await supabase
+const { data: stats, error } = await supabase
   .from("lab_stats")
   .select("*")
   .single();
+
+console.log("Supabase stats:", stats);
+console.log("Supabase error:", error);
 
 const thmRooms = stats?.thm_rooms ?? 0;
 const thmPoints = stats?.thm_points ?? 0;
